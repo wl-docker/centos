@@ -1,0 +1,10 @@
+FROM centos:7
+RUN yum install https://www.elrepo.org/elrepo-release-7.0-4.el7.elrepo.noarch.rpm -y \
+    && rpm -ivh http://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/mysql57-community-release-el7-10.noarch.rpm \ 
+    && yum -y --enablerepo=elrepo-kernel install --downloadonly --downloaddir=/data/kernel-lt kernel-lt.x86_64 kernel-lt-devel.x86_64\
+    && yum -y --enablerepo=elrepo-kernel install --downloadonly --downloaddir=/data/kernel-ml kernel-ml.x86_64 kernel-ml-devel.x86_64\
+    && createrepo /data/kernel-lt \
+    && createrepo /data/kernel-ml \
+    && tar zcvf /data/repo.tar.gz /data/{kernel-lt,kernel-ml} \
+    && rm -rf /data/{kernel-lt,kernel-ml} \
+    && rm -rf /var/cache/yum
