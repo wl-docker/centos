@@ -6,6 +6,7 @@ RUN yum install yum-plugin-downloadonly yum-utils device-mapper-persistent-data 
     && yum -y --enablerepo=elrepo-kernel install --downloadonly --downloaddir=/data/kernel-ml kernel-ml.x86_64 kernel-ml-devel.x86_64\
     && createrepo /data/kernel-lt \
     && createrepo /data/kernel-ml \
-    && tar zcvf /data/repo.tar.gz /data/{kernel-lt,kernel-ml} \
+    && tar zcvf /data/kernel-lt.tar.gz /data/kernel-lt \
+    && tar zcvf /data/kernel-ml.tar.gz /data/kernel-ml \
     && rm -rf /data/{kernel-lt,kernel-ml} \
     && rm -rf /var/cache/yum
