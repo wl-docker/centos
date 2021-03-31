@@ -3,10 +3,7 @@ RUN yum install yum-plugin-downloadonly yum-utils device-mapper-persistent-data 
     && yum install https://www.elrepo.org/elrepo-release-7.0-4.el7.elrepo.noarch.rpm -y \
     && rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org \ 
     && yum -y --enablerepo=elrepo-kernel install --downloadonly --downloaddir=/data/kernel-lt kernel-lt.x86_64 kernel-lt-devel.x86_64\
-    && yum -y --enablerepo=elrepo-kernel install --downloadonly --downloaddir=/data/kernel-ml kernel-ml.x86_64 kernel-ml-devel.x86_64\
     && createrepo /data/kernel-lt \
-    && createrepo /data/kernel-ml \
     && tar zcvf /data/kernel-lt.tar.gz /data/kernel-lt \
-    && tar zcvf /data/kernel-ml.tar.gz /data/kernel-ml \
-    && rm -rf /data/{kernel-lt,kernel-ml} \
+    && rm -rf /data/kernel-lt \
     && rm -rf /var/cache/yum
